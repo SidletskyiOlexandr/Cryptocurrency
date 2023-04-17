@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using Cryptocurrency.BLL.Interfaces;
+using Cryptocurrency.BLL.Services;
+using Microsoft.Extensions.DependencyInjection;
 using System.Windows;
 
 namespace Cryptocurrency.UI
@@ -13,5 +10,22 @@ namespace Cryptocurrency.UI
     /// </summary>
     public partial class App : Application
     {
+        private readonly ServiceProvider _serviceProvider;
+
+        public App()
+        {
+            var services = new ServiceCollection();
+            services.AddScoped<ICryptocurrencyService, CryptocurrencyService>();
+            _serviceProvider = services.BuildServiceProvider();
+        }
+
+        protected override void OnStartup(StartupEventArgs e)
+        {
+            base.OnStartup(e);
+
+            // Create main window and inject service
+            var mainWindow = new MainWindow(_serviceProvider.GetService<ICryptocurrencyService>());
+            mainWindow.Show();
+        }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Cryptocurrency.BLL.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +21,18 @@ namespace Cryptocurrency.UI
     /// </summary>
     public partial class MainWindow : Window
     {
-        public MainWindow()
+        private readonly ICryptocurrencyService _cryptocurrencyService;
+
+        public MainWindow(ICryptocurrencyService cryptocurrencyService)
         {
             InitializeComponent();
+            _cryptocurrencyService = cryptocurrencyService;
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            var result = _cryptocurrencyService.GetTopCurrenciesAsync();
+            MessageBox.Show(result);
         }
     }
 }
