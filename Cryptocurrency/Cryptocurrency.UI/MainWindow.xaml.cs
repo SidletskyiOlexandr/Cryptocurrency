@@ -16,10 +16,10 @@ namespace Cryptocurrency.UI
             _cryptocurrencyService = cryptocurrencyService;
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private async void Button_Click(object sender, RoutedEventArgs e)
         {
-            var result = _cryptocurrencyService.GetTopCurrenciesAsync();
-            MessageBox.Show(result);
+            var result = await _cryptocurrencyService.GetTopCurrenciesAsync();
+            MessageBox.Show("sss q");
         }
     }
 }

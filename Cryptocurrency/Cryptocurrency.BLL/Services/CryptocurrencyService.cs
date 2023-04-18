@@ -1,4 +1,5 @@
 ﻿using Cryptocurrency.BLL.Interfaces;
+using Cryptocurrency.DAL.DTOs;
 
 namespace Cryptocurrency.BLL.Services
 {
@@ -10,9 +11,9 @@ namespace Cryptocurrency.BLL.Services
         {
             _httpService = httpService;
         }
-        public string GetTopCurrenciesAsync()
+        public async Task<TrendingCurrencyDto> GetTopCurrenciesAsync()
         {
-            return "bla bla bla";
+            return await _httpService.Get<TrendingCurrencyDto>("https://api.coingecko.com/api/v3/search/trending");
         }
     }
 }

@@ -13,7 +13,7 @@ namespace Cryptocurrency.BLL.Services
         public HttpService(HttpClient httpClient)
         {
             _httpClient = httpClient;
-            _httpClient.BaseAddress = new Uri("https://localhost:7219/api/");
+            //_httpClient.BaseAddress = new Uri("https://api.coingecko.com/api/v3/");
         }
 
         public async Task<T> Delete<T>(string path)
@@ -25,8 +25,6 @@ namespace Cryptocurrency.BLL.Services
                 var json = await response.Content.ReadAsStringAsync();
                 throw new Exception(JObject.Parse(json)?["error"]?.ToString());
             }
-
-            var a = response.Content;
 
             return await response.Content.ReadFromJsonAsync<T>();
         }

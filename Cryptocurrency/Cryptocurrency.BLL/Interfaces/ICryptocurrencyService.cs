@@ -1,8 +1,10 @@
 ﻿
+using Cryptocurrency.DAL.DTOs;
+
 namespace Cryptocurrency.BLL.Interfaces
 {
     public interface ICryptocurrencyService
     {
-        string GetTopCurrenciesAsync();
+        Task<TrendingCurrencyDto> GetTopCurrenciesAsync();
     }
 }
