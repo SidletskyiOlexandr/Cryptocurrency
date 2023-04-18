@@ -1,6 +1,7 @@
 ﻿using Cryptocurrency.BLL.Interfaces;
 using Cryptocurrency.BLL.Services;
 using Microsoft.Extensions.DependencyInjection;
+using System.Net.Http;
 using System.Windows;
 
 namespace Cryptocurrency.UI
@@ -16,6 +17,10 @@ namespace Cryptocurrency.UI
         {
             var services = new ServiceCollection();
             services.AddScoped<ICryptocurrencyService, CryptocurrencyService>();
+            services.AddScoped<IHttpService>(provider =>
+            {
+                return new HttpService(new HttpClient());
+            });
             _serviceProvider = services.BuildServiceProvider();
         }
 
